@@ -10,7 +10,21 @@ CORS(app)
 @app.route('/')
 def index():
     return '<h1>Cookies and Sessions Demo</h1>'
-    
+
+def expiration_time(delay):
+    expiration_time=datetime.datetime.now()+datetime.timedelta(days=delay)
+    return expiration_time
+
+@app.route('/cookies', methods=["Get"] ) 
+def cookies():
+    # import ipdb; ipdb.set_trace()
+    response=make_response({"message": "Hit cookies route!"}, 200)
+    print("print",response) 
+    print("request",request) 
+    response.set_cookie("hello","hgdjd")
+    response.set_cookie("farnoosh","Attar", expires=expiration_time(90), httponly=True)
+    print("cookies",request.cookies) 
+    return response
 
 # DELIVERABLES
     # 1. Create a GET '/cookies' custom route
