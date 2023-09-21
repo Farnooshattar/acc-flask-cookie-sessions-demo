@@ -21,8 +21,11 @@ def cookies():
     response=make_response({"message": "Hit cookies route!"}, 200)
     print("print",response) 
     print("request",request) 
-    response.set_cookie("hello","hgdjd")
-    response.set_cookie("farnoosh","Attar", expires=expiration_time(90), httponly=True)
+    if request.cookies["farnoosh"]:
+        response.set_cookie("hello","hgdjd")
+    else:    
+        response.set_cookie("farnoosh","Attar", expires=expiration_time(90), httponly=True)
+    
     print("cookies",request.cookies) 
     return response
 
