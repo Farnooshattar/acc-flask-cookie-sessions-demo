@@ -5,6 +5,9 @@ from flask_cors import CORS
 import datetime
 
 app = Flask(__name__)
+# python -c 'import os; print(os.urandom(16))'
+app.secret_key = b'/\xc4`\xb5\x94#\xc0t,:\x16n7\x98\x02\n'  
+
 CORS(app)
 
 @app.route('/')
@@ -25,6 +28,8 @@ def cookies():
         response.set_cookie("hello","hgdjd")
     else:    
         response.set_cookie("farnoosh","Attar", expires=expiration_time(90), httponly=True)
+    
+    session["current_user"]="googoosh"
     
     print("cookies",request.cookies) 
     return response
